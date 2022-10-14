@@ -6,12 +6,23 @@ template <typename T> Lista<T>::Lista(){
     this->ultimo_ = nullptr;
 }
 
-template <typename T> void Lista<T>::inserir(T item){
-    // No<T>* novoItem = new No<T>{item, nullptr};
+template <typename T> void Lista<T>::inserir_fim(T item){
+    No<T>* novo_item = new No<T>{item, nullptr};
+    erroAssert(!(novo_item == NULL), "Erro ao alocar memoria para item da lista");
+
+    novo_item->item = item;
+    novo_item->proximo = nullptr;
+
+    if(this->listaVazia()){
+        novo_item->anterior = nullptr;
+    } else {
+        novo_item->anterior = this->ultimo_;
+        this->ultimo_ = novo_item;
+    }
 }
 
 template <typename T> void Lista<T>::remover(T item){
-    // No<T>* novoItem = new No<T>{item, nullptr};
+    //No<T>* novo_item = new No<T>{item, nullptr};
 }
 
 template <typename T> bool Lista<T>::presente(T item){

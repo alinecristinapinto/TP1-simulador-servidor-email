@@ -2,7 +2,11 @@
 #define LISTA_H
 
 #include <iostream>
+#include "msgassert.hpp"
 
+/**
+ * @brief Struct que representa um no de uma lista generica
+ */
 template <typename T> struct No {  
     T item;
     No* anterior; 
@@ -16,7 +20,7 @@ template <typename T> class Lista {
     public:
     Lista();
 
-    void inserir(T item);
+    void inserir_fim(T item);
 
     void remover(T item);
 
