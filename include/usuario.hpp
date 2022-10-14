@@ -9,6 +9,8 @@
  */
 class Usuario {
     public:
+    Usuario();
+    
     Usuario(int id);
 
     virtual ~Usuario() = default;
