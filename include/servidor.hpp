@@ -17,6 +17,8 @@ class Servidor {
 
     void removerUsuario(int id);
 
+    void imprimir();
+
     protected:      
     /**
     * @brief Lista de usuarios do servidor de email

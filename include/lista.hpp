@@ -8,7 +8,7 @@
  * @brief Struct que representa um no de uma lista generica
  */
 template <typename T> struct No {  
-    T item;
+    T* item;
     No* anterior; 
     No* proximo; 
 }; 
@@ -20,13 +20,17 @@ template <typename T> class Lista {
     public:
     Lista();
 
-    void inserir_fim(T item);
+    void inserir_fim(T* item);
 
-    void remover(T item);
+    void remover(T* item);
 
-    bool presente(T item);
+    bool presente(T* item);
+
+    T* getItem(int id);
 
     bool listaVazia();
+
+    void imprimir();
     
     virtual ~Lista() = default;
 

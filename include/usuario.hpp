@@ -13,6 +13,8 @@ class Usuario {
     
     Usuario(int id);
 
+    int getId();
+
     virtual ~Usuario() = default;
 
     protected:      

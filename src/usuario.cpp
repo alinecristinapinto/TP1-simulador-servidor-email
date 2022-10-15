@@ -9,3 +9,7 @@ Usuario::Usuario(int id){
     this->id = id;
     this->caixa = new CaixaDeEntrada();
 }
+
+int Usuario::getId(){
+    return this->id;
+}
