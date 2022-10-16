@@ -1,6 +1,12 @@
 #include "listaUsuarios.hpp"
 
-ListaUsuarios::ListaUsuarios(): Lista<Usuario>(){}
+ListaUsuarios::ListaUsuarios(){
+    this->primeiro_ = nullptr;
+}
+
+bool ListaUsuarios::lista_vazia() {
+    return this->primeiro_ == nullptr;
+}
 
 bool ListaUsuarios::presente(int id){
     No<Usuario>* aux = this->primeiro_;
@@ -106,5 +112,13 @@ void ListaUsuarios::imprimir() {
     while (aux){
         std::cout << aux->item.getId() << std::endl;
         aux = aux->proximo;
+    }
+}
+
+ListaUsuarios::~ListaUsuarios(){
+    No<Usuario>* aux = this->primeiro_;
+
+    while (aux){
+        this->remover(aux->item.getId());
     }
 }

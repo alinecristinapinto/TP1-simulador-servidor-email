@@ -2,8 +2,9 @@
 #define LISTA_EMAILS_H
 
 #include <iostream>
-#include "lista.hpp"
 #include "email.hpp"
+#include "constantes.hpp"
+#include "msgassert.hpp"
 
 struct Celula {
     Email item;

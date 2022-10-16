@@ -1,10 +1,11 @@
 #ifndef LISTA_USUARIOS_H
 #define LISTA_USUARIOS_H
 
-#include "lista.hpp"
 #include "usuario.hpp"
+#include "constantes.hpp"
+#include "msgassert.hpp"
 
-class ListaUsuarios : public Lista<Usuario> {
+class ListaUsuarios {
 public:
     ListaUsuarios();
 
@@ -14,13 +15,18 @@ public:
 
     bool presente(int id);
 
+    bool lista_vazia();
+
     void enviarEmail(int idUsuario, int prioridade, std::string mensagem);
 
     void consultarRemoverEmail(int idUsuario);
 
     void imprimir();
 
-    virtual ~ListaUsuarios() = default;
+    ~ListaUsuarios();
+
+protected:
+    No<Usuario>* primeiro_;
 };
 
 #endif
