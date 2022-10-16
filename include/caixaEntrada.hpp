@@ -8,7 +8,10 @@
  * da caixa de entrada de um usuario.
  */
 class CaixaDeEntrada {
-    protected:      
+public:
+    CaixaDeEntrada();
+    void adicionar(int prioridade, std::string mensagem);
+protected:      
     FilaPorPrioridadeEmails* mensagens;
 };
 

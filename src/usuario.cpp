@@ -13,3 +13,7 @@ Usuario::Usuario(int id){
 int Usuario::getId(){
     return this->id;
 }
+
+CaixaDeEntrada* Usuario::getCaixaDeEntrada(){
+    return this->caixa;
+}

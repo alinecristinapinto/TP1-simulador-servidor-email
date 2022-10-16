@@ -5,11 +5,15 @@ Servidor::Servidor(){
 }
 
 void Servidor::cadastrarUsuario(int id){
-    this->usuarios->inserir_inicio(id);
+    this->usuarios->inserirInicio(id);
 }
 
 void Servidor::removerUsuario(int id){
     this->usuarios->remover(id);
+}
+
+void Servidor::enviarMensagem(int idUsuario, int prioridadeMensagem, std::string mensagem){
+    this->usuarios->enviarMensagem(idUsuario, prioridadeMensagem, mensagem);
 }
 
 void Servidor::imprimir(){

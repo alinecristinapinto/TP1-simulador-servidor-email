@@ -15,6 +15,8 @@ class Usuario {
 
     int getId();
 
+    CaixaDeEntrada* getCaixaDeEntrada();
+
     virtual ~Usuario() = default;
 
     protected:      

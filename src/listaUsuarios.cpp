@@ -15,7 +15,7 @@ bool ListaUsuarios::presente(int id){
     return false;
 }
 
-void ListaUsuarios::inserir_inicio(int id){
+void ListaUsuarios::inserirInicio(int id){
     if(this->presente(id)){
         std::cout << "ERRO: CONTA " << id << " JA EXISTENTE" << std::endl;
         return;
@@ -64,6 +64,22 @@ void ListaUsuarios::remover(int id){
     }
 
     std::cout << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
+}
+
+void ListaUsuarios::enviarMensagem(int idUsuario, int prioridade, std::string mensagem){
+    if(!this->presente(idUsuario)){
+        std::cout << "ERRO: CONTA " << idUsuario << " NAO EXISTENTE" << std::endl;
+        return;
+    } 
+
+    No<Usuario>* aux = this->primeiro_;
+
+    while(aux){
+        if(aux->item->getId() == idUsuario){
+            aux->item->getCaixaDeEntrada()->adicionar(prioridade, mensagem);
+        }
+        aux = aux->proximo;
+    }
 }
 
 void ListaUsuarios::imprimir() {

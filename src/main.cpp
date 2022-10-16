@@ -19,8 +19,10 @@ int main(int argc, char* argv[]){
     //     cout << linha << endl;
     // }
 
-    // Servidor *servidor = new Servidor();
-    // servidor->cadastrarUsuario(1);
+    Servidor *servidor = new Servidor();
+    servidor->cadastrarUsuario(1);
+    servidor->enviarMensagem(1, 1, "Teste.");
+    servidor->enviarMensagem(1, 2, "Maior prioridade.");
     // servidor->cadastrarUsuario(2);
     // servidor->cadastrarUsuario(2);
     // servidor->cadastrarUsuario(3);

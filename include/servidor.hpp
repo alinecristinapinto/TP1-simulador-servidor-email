@@ -18,6 +18,8 @@ class Servidor {
 
     void imprimir();
 
+    void enviarMensagem(int idUsuario, int prioridadeMensagem, std::string mensagem);
+
     protected:      
     /**
     * @brief Lista de usuarios do servidor de email

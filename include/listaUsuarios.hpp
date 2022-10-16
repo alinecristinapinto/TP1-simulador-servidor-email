@@ -8,11 +8,13 @@ class ListaUsuarios : public Lista<Usuario> {
 public:
     ListaUsuarios();
 
-    void inserir_inicio(int id);
+    void inserirInicio(int id);
 
     void remover(int id);
 
     bool presente(int id);
+    
+    void enviarMensagem(int idUsuario, int prioridade, std::string mensagem);
 
     void imprimir();
 
