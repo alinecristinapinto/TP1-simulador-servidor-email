@@ -21,8 +21,15 @@ int main(int argc, char* argv[]){
     Servidor *servidor = new Servidor();
     servidor->cadastrarUsuario(1);
     servidor->cadastrarUsuario(2);
+    servidor->cadastrarUsuario(2);
+    servidor->cadastrarUsuario(3);
+    servidor->cadastrarUsuario(4);
+    servidor->cadastrarUsuario(5);
     servidor->imprimir();
     servidor->removerUsuario(2);
+    servidor->removerUsuario(4);
+    servidor->removerUsuario(5);
+    servidor->removerUsuario(7);
     servidor->imprimir();
     
     return 0;

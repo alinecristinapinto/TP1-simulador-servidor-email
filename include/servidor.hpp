@@ -3,8 +3,7 @@
 
 #include <iostream>
 #include "msgassert.hpp"
-#include "usuario.hpp"
-#include "lista.hpp"
+#include "listaUsuarios.hpp"
 
 /**
  * @brief Classe responsavel pelo armazenamento e gerenciamento do servidor de emails
@@ -23,7 +22,7 @@ class Servidor {
     /**
     * @brief Lista de usuarios do servidor de email
     */
-    Lista<Usuario> *usuarios;
+    ListaUsuarios *usuarios;
 };
 
 #endif

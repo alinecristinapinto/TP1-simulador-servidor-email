@@ -22,19 +22,11 @@ template <typename T> class Lista {
 
     void inserir_fim(T* item);
 
-    void remover(T* item);
-
-    bool presente(T* item);
-
-    T* getItem(int id);
-
-    bool listaVazia();
-
-    void imprimir();
+    bool lista_vazia();
     
     virtual ~Lista() = default;
 
-    private:
+    protected:
     No<T>* primeiro_;
     No<T>* ultimo_;
 };
