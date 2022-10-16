@@ -66,7 +66,7 @@ void ListaUsuarios::remover(int id){
     std::cout << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
 }
 
-void ListaUsuarios::enviarMensagem(int idUsuario, int prioridade, std::string mensagem){
+void ListaUsuarios::enviarEmail(int idUsuario, int prioridade, std::string mensagem){
     if(!this->presente(idUsuario)){
         std::cout << "ERRO: CONTA " << idUsuario << " NAO EXISTENTE" << std::endl;
         return;
@@ -77,6 +77,24 @@ void ListaUsuarios::enviarMensagem(int idUsuario, int prioridade, std::string me
     while(aux){
         if(aux->item->getId() == idUsuario){
             aux->item->getCaixaDeEntrada()->adicionar(prioridade, mensagem);
+        }
+        aux = aux->proximo;
+    }
+
+    std::cout << "OK: MENSAGEM PARA " << idUsuario << " ENTREGUE" << std::endl;
+}
+
+void ListaUsuarios::consultarRemoverEmail(int idUsuario){
+    if(!this->presente(idUsuario)){
+        std::cout << "ERRO: CONTA " << idUsuario << " NAO EXISTENTE" << std::endl;
+        return;
+    } 
+
+    No<Usuario>* aux = this->primeiro_;
+
+    while(aux){
+        if(aux->item->getId() == idUsuario){
+            aux->item->getCaixaDeEntrada()->consultarRemoverPrimeiroEmail();
         }
         aux = aux->proximo;
     }

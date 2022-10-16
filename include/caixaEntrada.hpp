@@ -10,7 +10,11 @@
 class CaixaDeEntrada {
 public:
     CaixaDeEntrada();
+
     void adicionar(int prioridade, std::string mensagem);
+
+    void consultarRemoverPrimeiroEmail();
+    
 protected:      
     FilaPorPrioridadeEmails* mensagens;
 };

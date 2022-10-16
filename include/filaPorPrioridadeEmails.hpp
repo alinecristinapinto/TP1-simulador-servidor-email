@@ -11,6 +11,8 @@ public:
 
     void adicionar(int prioridade, std::string mensagem);
 
+    void consultarRemoverPrimeiroEmail();
+
     bool vazia();
 
     void imprimir();

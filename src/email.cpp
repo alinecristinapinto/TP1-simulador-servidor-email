@@ -16,3 +16,5 @@ int Email::getPrioridade(){
 std::string Email::getMensagem(){
     return this->mensagem;
 }
+
+Email::~Email(){}

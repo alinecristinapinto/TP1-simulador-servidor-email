@@ -12,8 +12,12 @@ void Servidor::removerUsuario(int id){
     this->usuarios->remover(id);
 }
 
-void Servidor::enviarMensagem(int idUsuario, int prioridadeMensagem, std::string mensagem){
-    this->usuarios->enviarMensagem(idUsuario, prioridadeMensagem, mensagem);
+void Servidor::enviarEmail(int idUsuario, int prioridadeMensagem, std::string mensagem){
+    this->usuarios->enviarEmail(idUsuario, prioridadeMensagem, mensagem);
+}
+
+void Servidor::consultarEmail(int idUsuario){
+    this->usuarios->consultarRemoverEmail(idUsuario);
 }
 
 void Servidor::imprimir(){

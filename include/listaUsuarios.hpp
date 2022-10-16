@@ -13,8 +13,10 @@ public:
     void remover(int id);
 
     bool presente(int id);
-    
-    void enviarMensagem(int idUsuario, int prioridade, std::string mensagem);
+
+    void enviarEmail(int idUsuario, int prioridade, std::string mensagem);
+
+    void consultarRemoverEmail(int idUsuario);
 
     void imprimir();
 

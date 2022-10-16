@@ -8,7 +8,7 @@
  * @brief Struct que representa um no de uma lista generica
  */
 template <typename T> struct No {  
-    T* item;
+    T item;
     No* anterior; 
     No* proximo; 
 }; 

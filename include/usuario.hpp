@@ -8,7 +8,7 @@
  * de usuario.
  */
 class Usuario {
-    public:
+public:
     Usuario();
     
     Usuario(int id);
@@ -19,14 +19,8 @@ class Usuario {
 
     virtual ~Usuario() = default;
 
-    protected:      
-    /**
-    * @brief Id do usuario 
-    */
+protected:      
     int id;
-    /**
-    * @brief Caixa de entrada do usuario 
-    */
     CaixaDeEntrada *caixa;
 };
 

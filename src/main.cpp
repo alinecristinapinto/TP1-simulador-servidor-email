@@ -21,8 +21,11 @@ int main(int argc, char* argv[]){
 
     Servidor *servidor = new Servidor();
     servidor->cadastrarUsuario(1);
-    servidor->enviarMensagem(1, 1, "Teste.");
-    servidor->enviarMensagem(1, 2, "Maior prioridade.");
+    servidor->enviarEmail(1, 1, "Teste.");
+    servidor->enviarEmail(1, 2, "Maior prioridade.");
+    servidor->consultarEmail(1);
+    servidor->consultarEmail(1);
+    servidor->consultarEmail(1);
     // servidor->cadastrarUsuario(2);
     // servidor->cadastrarUsuario(2);
     // servidor->cadastrarUsuario(3);

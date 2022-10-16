@@ -18,7 +18,9 @@ class Servidor {
 
     void imprimir();
 
-    void enviarMensagem(int idUsuario, int prioridadeMensagem, std::string mensagem);
+    void enviarEmail(int idUsuario, int prioridadeMensagem, std::string mensagem);
+
+    void consultarEmail(int idUsuario);
 
     protected:      
     /**

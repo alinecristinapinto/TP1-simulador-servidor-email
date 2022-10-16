@@ -15,7 +15,8 @@ public:
 
     std::string getMensagem();
 
-    virtual ~Email() = default;
+    ~Email();
+
 protected:      
     /**
     * @brief Prioridade da mensagem - 0 a 9
