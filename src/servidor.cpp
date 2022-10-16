@@ -5,12 +5,7 @@ Servidor::Servidor(){
 }
 
 void Servidor::cadastrarUsuario(int id){
-    if(this->usuarios->presente(id)){
-        std::cout << "ERRO: CONTA " << id << " JA EXISTENTE" << std::endl;
-    } else {
-        this->usuarios->inserir_fim(new Usuario(id));
-        std::cout << "OK: CONTA " << id << " CADASTRADA" << std::endl;
-    }
+    this->usuarios->inserir_inicio(id);
 }
 
 void Servidor::removerUsuario(int id){

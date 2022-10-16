@@ -15,26 +15,32 @@ bool ListaUsuarios::presente(int id){
     return false;
 }
 
+void ListaUsuarios::inserir_inicio(int id){
+    if(this->presente(id)){
+        std::cout << "ERRO: CONTA " << id << " JA EXISTENTE" << std::endl;
+        return;
+    } 
+
+    No<Usuario>* novo_item = new No<Usuario>{new Usuario(id), nullptr};
+    erroAssert(!(novo_item == NULL), "Erro ao alocar memoria para usuario");
+
+    if(this->lista_vazia()){
+        novo_item->proximo = nullptr;
+        this->primeiro_ = novo_item;
+    } else {
+        novo_item->proximo = this->primeiro_;
+        this->primeiro_ = novo_item;
+    }
+
+    std::cout << "OK: CONTA " << id << " CADASTRADA" << std::endl;
+}
+
 void ListaUsuarios::remover(int id){
     No<Usuario> *usuario_deletado, *aux;
 
     if(this->primeiro_->item->getId() == id){
         usuario_deletado = this->primeiro_;
         this->primeiro_ = this->primeiro_->proximo;
-        this->primeiro_->anterior = nullptr;
-
-        if(this->primeiro_ == nullptr) this->ultimo_ = nullptr;   
-        
-        std::cout << "OK: CONTA " << id << " REMOVIDA" << std::endl;
-        delete usuario_deletado; 
-
-        return;
-    } else if (this->ultimo_->item->getId() == id){
-        usuario_deletado = this->ultimo_;
-        this->ultimo_ = this->ultimo_->anterior;
-        this->ultimo_->proximo = nullptr;
-        
-        if(this->ultimo_ == nullptr) this->primeiro_ = nullptr;
 
         std::cout << "OK: CONTA " << id << " REMOVIDA" << std::endl;
         delete usuario_deletado; 
@@ -49,10 +55,7 @@ void ListaUsuarios::remover(int id){
         if(aux->proximo){
             usuario_deletado = aux->proximo;
             aux->proximo = usuario_deletado->proximo;
-            if(aux->proximo){
-                aux->proximo->anterior = aux;
-            }
-
+  
             std::cout << "OK: CONTA " << id << " REMOVIDA" << std::endl;
             delete usuario_deletado; 
 

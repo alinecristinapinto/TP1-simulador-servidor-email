@@ -8,14 +8,20 @@
  * da emails (mensagens).
  */
 class Email {
-    protected:      
+public:
+    Email(int prioridade, std::string mensagem);
+
+    int getPrioridade();
+
+    std::string getMensagem();
+
+    virtual ~Email() = default;
+protected:      
     /**
     * @brief Prioridade da mensagem - 0 a 9
     */
     int prioridade;
-    /**
-    * @brief Mensagem 
-    */
+
     std::string mensagem;
 };
 

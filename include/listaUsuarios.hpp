@@ -5,8 +5,10 @@
 #include "usuario.hpp"
 
 class ListaUsuarios : public Lista<Usuario> {
-    public:
+public:
     ListaUsuarios();
+
+    void inserir_inicio(int id);
 
     void remover(int id);
 

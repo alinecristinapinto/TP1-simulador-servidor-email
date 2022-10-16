@@ -1,7 +1,7 @@
 #ifndef CAIXA_DE_ENTRADA_H
 #define CAIXA_DE_ENTRADA_H
 
-#include "email.hpp" 
+#include "filaPorPrioridadeEmails.hpp" 
 
 /**
  * @brief Classe responsavel pelo armazenamento e gerenciamento das informacoes
@@ -9,11 +9,7 @@
  */
 class CaixaDeEntrada {
     protected:      
-    /**
-    * @brief Lista de mensagens (email)
-    */
-    // TODO: implementar estrutura de lista
-    Email mensagens;
+    FilaPorPrioridadeEmails* mensagens;
 };
 
 #endif

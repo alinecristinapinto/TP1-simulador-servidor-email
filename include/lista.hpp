@@ -17,18 +17,15 @@ template <typename T> struct No {
  * @brief Classe que representa uma lista duplamente encadeada generica
  */
 template <typename T> class Lista {
-    public:
+public:
     Lista();
-
-    void inserir_fim(T* item);
 
     bool lista_vazia();
     
     virtual ~Lista() = default;
 
-    protected:
+protected:
     No<T>* primeiro_;
-    No<T>* ultimo_;
 };
 
 #endif
