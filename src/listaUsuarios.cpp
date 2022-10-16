@@ -6,7 +6,7 @@ bool ListaUsuarios::presente(int id){
     No<Usuario>* aux = this->primeiro_;
 
     while (aux){
-        if(aux->item->getId() == id){
+        if(aux->item.getId() == id){
             return true;
         }
         aux = aux->proximo;
@@ -21,7 +21,7 @@ void ListaUsuarios::inserirInicio(int id){
         return;
     } 
 
-    No<Usuario>* novo_item = new No<Usuario>{new Usuario(id), nullptr};
+    No<Usuario>* novo_item = new No<Usuario>{Usuario(id), nullptr};
     erroAssert(!(novo_item == NULL), "Erro ao alocar memoria para usuario");
 
     if(this->lista_vazia()){
@@ -38,7 +38,7 @@ void ListaUsuarios::inserirInicio(int id){
 void ListaUsuarios::remover(int id){
     No<Usuario> *usuario_deletado, *aux;
 
-    if(this->primeiro_->item->getId() == id){
+    if(this->primeiro_->item.getId() == id){
         usuario_deletado = this->primeiro_;
         this->primeiro_ = this->primeiro_->proximo;
 
@@ -49,7 +49,7 @@ void ListaUsuarios::remover(int id){
     } else {
         aux = this->primeiro_;
 
-        while (aux->proximo && aux->proximo->item->getId() != id) {
+        while (aux->proximo && aux->proximo->item.getId() != id) {
             aux = aux->proximo;
         }
         if(aux->proximo){
@@ -75,8 +75,8 @@ void ListaUsuarios::enviarEmail(int idUsuario, int prioridade, std::string mensa
     No<Usuario>* aux = this->primeiro_;
 
     while(aux){
-        if(aux->item->getId() == idUsuario){
-            aux->item->getCaixaDeEntrada()->adicionar(prioridade, mensagem);
+        if(aux->item.getId() == idUsuario){
+            aux->item.getCaixaDeEntrada()->adicionar(prioridade, mensagem);
         }
         aux = aux->proximo;
     }
@@ -93,8 +93,8 @@ void ListaUsuarios::consultarRemoverEmail(int idUsuario){
     No<Usuario>* aux = this->primeiro_;
 
     while(aux){
-        if(aux->item->getId() == idUsuario){
-            aux->item->getCaixaDeEntrada()->consultarRemoverPrimeiroEmail();
+        if(aux->item.getId() == idUsuario){
+            aux->item.getCaixaDeEntrada()->consultarRemoverPrimeiroEmail();
         }
         aux = aux->proximo;
     }
@@ -104,7 +104,7 @@ void ListaUsuarios::imprimir() {
     No<Usuario>* aux = this->primeiro_;
 
     while (aux){
-        std::cout << aux->item->getId() << std::endl;
+        std::cout << aux->item.getId() << std::endl;
         aux = aux->proximo;
     }
 }

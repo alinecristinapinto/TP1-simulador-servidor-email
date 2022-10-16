@@ -5,6 +5,13 @@
 #include "lista.hpp"
 #include "email.hpp"
 
+struct Celula {
+    Email item;
+    Celula* anterior; 
+    Celula* proximo; 
+};
+
+
 class FilaPorPrioridadeEmails {
 public:
     FilaPorPrioridadeEmails();
@@ -19,8 +26,8 @@ public:
 
     ~FilaPorPrioridadeEmails();
 protected:
-    No<Email>* primeiro_;
-    No<Email>* ultimo_; 
+    Celula* primeiro_;
+    Celula* ultimo_; 
 };
 
 #endif

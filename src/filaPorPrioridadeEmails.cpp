@@ -10,7 +10,7 @@ bool FilaPorPrioridadeEmails::vazia(){
 }
 
 void FilaPorPrioridadeEmails::adicionar(int prioridade, std::string mensagem){
-    No<Email> *novo_item = new No<Email>{Email(prioridade, mensagem), nullptr, nullptr};
+    Celula *novo_item = new Celula{Email(prioridade, mensagem), nullptr, nullptr};
     erroAssert(!(novo_item == NULL), "Erro ao alocar memoria para mensagem de email");
     
     if(this->vazia()){
@@ -28,7 +28,7 @@ void FilaPorPrioridadeEmails::adicionar(int prioridade, std::string mensagem){
             this->ultimo_ = novo_item;
         }
     } else {
-        No<Email> *aux = this->ultimo_;
+        Celula *aux = this->ultimo_;
 
         while(aux->anterior && prioridade > aux->anterior->item.getPrioridade()){
             aux = aux->anterior;
@@ -55,7 +55,7 @@ void FilaPorPrioridadeEmails::consultarRemoverPrimeiroEmail(){
         return;
     }
 
-    No<Email> *remover = this->primeiro_;
+    Celula *remover = this->primeiro_;
     std::cout << "CONSULTA " << remover->item.getPrioridade() << ": " << remover->item.getMensagem() << std::endl;
     
     if(this->primeiro_->proximo){
@@ -67,7 +67,7 @@ void FilaPorPrioridadeEmails::consultarRemoverPrimeiroEmail(){
 }
 
 void FilaPorPrioridadeEmails::imprimir(){
-    No<Email>* aux = this->primeiro_;
+    Celula* aux = this->primeiro_;
 
     while (aux){
         std::cout << aux->item.getPrioridade() << " " << aux->item.getMensagem() << std::endl;

@@ -1,53 +1,50 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <sstream>
 
 #include "msgassert.hpp" 
 #include "servidor.hpp"
 #include "filaPorPrioridadeEmails.hpp"
+#include "constantes.hpp"
 
 using namespace std;
 
+void processarComando(stringstream *linha, Servidor* servidor){
+    string comando = "";
+    int idUsuario;
+
+    *linha >> comando >> idUsuario;
+
+    if(comando == OPERACAO_CADASTRAR){
+        servidor->cadastrarUsuario(idUsuario);
+    } else if(comando == OPERACAO_CONSULTA){
+        servidor->consultarEmail(idUsuario);
+    } else if(comando == OPERACAO_ENTREGA){
+        int prioridade;
+        string mensagem;
+        *linha >> prioridade >> mensagem;
+        servidor->enviarEmail(idUsuario, prioridade, mensagem);
+    } else {
+        cout << "ERRO: Comando nao reconhecido" << endl;
+    }
+}
+
 int main(int argc, char* argv[]){
-    // erroAssert((argc == 2 && strcmp(argv[1], "") != 0), "Arquivo obrigatorio!");
-    // string nome_arquivo = argv[1]; 
+    erroAssert((argc == 2 && strcmp(argv[1], "") != 0), "Arquivo obrigatorio!");
+    string nome_arquivo = argv[1]; 
 
-    // ifstream arquivo(nome_arquivo);
-    // erroAssert(arquivo.is_open(), "Erro ao ler arquivo!");
-
-    // for(string linha; getline(arquivo, linha);){
-    //     cout << linha << endl;
-    // }
+    ifstream arquivo(nome_arquivo);
+    erroAssert(arquivo.is_open(), "Erro ao ler arquivo!");
 
     Servidor *servidor = new Servidor();
-    servidor->cadastrarUsuario(1);
-    servidor->enviarEmail(1, 1, "Teste.");
-    servidor->enviarEmail(1, 2, "Maior prioridade.");
-    servidor->consultarEmail(1);
-    servidor->consultarEmail(1);
-    servidor->consultarEmail(1);
-    // servidor->cadastrarUsuario(2);
-    // servidor->cadastrarUsuario(2);
-    // servidor->cadastrarUsuario(3);
-    // servidor->cadastrarUsuario(4);
-    // servidor->cadastrarUsuario(5);
-    // servidor->imprimir();
-    // servidor->removerUsuario(2);
-    // servidor->removerUsuario(4);
-    // servidor->removerUsuario(5);
-    // servidor->removerUsuario(7);
-    // servidor->imprimir();
 
-    // FilaPorPrioridadeEmails *fila = new FilaPorPrioridadeEmails();
-    // fila->adicionar(3, "oi");
-    // fila->adicionar(2, "ola");
-    // fila->adicionar(9, "mas eu tenho mais prioridade");
-    // fila->adicionar(2, "tudo bem?");
-    // fila->adicionar(1, "tudo e vc?");
-    // fila->adicionar(8, "quero ser o primeiro");
-   
+    for(string linha; getline(arquivo, linha);){
+        stringstream streamLinha(linha);
+        processarComando(&streamLinha, servidor);
+    }
 
-    // fila->imprimir();
-    
+    arquivo.close();
+
     return 0;
 }
