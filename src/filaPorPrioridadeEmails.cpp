@@ -6,7 +6,7 @@ FilaPorPrioridadeEmails::FilaPorPrioridadeEmails(){
 }
 
 bool FilaPorPrioridadeEmails::vazia(){
-    return this->primeiro_ == nullptr;
+    return this->primeiro_ == nullptr && this->ultimo_ == nullptr;
 }
 
 void FilaPorPrioridadeEmails::adicionar(int prioridade, std::string mensagem){
@@ -60,10 +60,15 @@ void FilaPorPrioridadeEmails::consultarRemoverPrimeiroEmail(int idUsuario){
     
     if(this->primeiro_->proximo){
         this->primeiro_ = this->primeiro_->proximo;
+        this->primeiro_->anterior = nullptr;
     }
-    delete remover;    
 
-    this->primeiro_->anterior = nullptr;
+    if(remover == this->ultimo_){
+        this->primeiro_ = nullptr;
+        this->ultimo_ = nullptr;
+    }
+
+    delete remover;    
 }
 
 void FilaPorPrioridadeEmails::imprimir(){
