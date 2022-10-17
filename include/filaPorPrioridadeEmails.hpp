@@ -5,13 +5,7 @@
 #include "email.hpp"
 #include "constantes.hpp"
 #include "msgassert.hpp"
-
-struct Celula {
-    Email item;
-    Celula* anterior; 
-    Celula* proximo; 
-};
-
+#include "log.hpp"
 
 class FilaPorPrioridadeEmails {
 public:
@@ -19,7 +13,7 @@ public:
 
     void adicionar(int prioridade, std::string mensagem);
 
-    void consultarRemoverPrimeiroEmail();
+    void consultarRemoverPrimeiroEmail(int idUsuario);
 
     bool vazia();
 
@@ -27,8 +21,8 @@ public:
 
     ~FilaPorPrioridadeEmails();
 protected:
-    Celula* primeiro_;
-    Celula* ultimo_; 
+    No<Email>* primeiro_;
+    No<Email>* ultimo_; 
 };
 
 #endif

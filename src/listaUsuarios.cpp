@@ -100,7 +100,7 @@ void ListaUsuarios::consultarRemoverEmail(int idUsuario){
 
     while(aux){
         if(aux->item.getId() == idUsuario){
-            aux->item.getCaixaDeEntrada()->consultarRemoverPrimeiroEmail();
+            aux->item.getCaixaDeEntrada()->consultarRemoverPrimeiroEmail(idUsuario);
         }
         aux = aux->proximo;
     }

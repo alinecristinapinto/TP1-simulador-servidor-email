@@ -1,6 +1,7 @@
 #ifndef CAIXA_DE_ENTRADA_H
 #define CAIXA_DE_ENTRADA_H
 
+#include <string> 
 #include "filaPorPrioridadeEmails.hpp" 
 
 /**
@@ -13,7 +14,7 @@ public:
 
     void adicionar(int prioridade, std::string mensagem);
 
-    void consultarRemoverPrimeiroEmail();
+    void consultarRemoverPrimeiroEmail(int idUsuario);
     
 protected:      
     FilaPorPrioridadeEmails* mensagens;

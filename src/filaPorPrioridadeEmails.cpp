@@ -10,7 +10,7 @@ bool FilaPorPrioridadeEmails::vazia(){
 }
 
 void FilaPorPrioridadeEmails::adicionar(int prioridade, std::string mensagem){
-    Celula *novo_item = new Celula{Email(prioridade, mensagem), nullptr, nullptr};
+    No<Email> *novo_item = new No<Email>{Email(prioridade, mensagem), nullptr, nullptr};
     erroAssert(!(novo_item == NULL), "Erro ao alocar memoria para mensagem de email");
     
     if(this->vazia()){
@@ -28,7 +28,7 @@ void FilaPorPrioridadeEmails::adicionar(int prioridade, std::string mensagem){
             this->ultimo_ = novo_item;
         }
     } else {
-        Celula *aux = this->ultimo_;
+        No<Email> *aux = this->ultimo_;
 
         while(aux->anterior && prioridade > aux->anterior->item.getPrioridade()){
             aux = aux->anterior;
@@ -49,14 +49,14 @@ void FilaPorPrioridadeEmails::adicionar(int prioridade, std::string mensagem){
     }
 }
 
-void FilaPorPrioridadeEmails::consultarRemoverPrimeiroEmail(){
+void FilaPorPrioridadeEmails::consultarRemoverPrimeiroEmail(int idUsuario){
     if(this->vazia()){
-        std::cout << "CAIXA DE ENTRADA VAZIA" << std::endl;
+        Log::erro("CAIXA DE ENTRADA VAZIA");
         return;
     }
 
-    Celula *remover = this->primeiro_;
-    std::cout << "CONSULTA " << remover->item.getPrioridade() << ": " << remover->item.getMensagem() << std::endl;
+    No<Email> *remover = this->primeiro_;
+    Log::info(("CONSULTA " + std::to_string(idUsuario) + ": " + remover->item.getMensagem()));
     
     if(this->primeiro_->proximo){
         this->primeiro_ = this->primeiro_->proximo;
@@ -67,7 +67,7 @@ void FilaPorPrioridadeEmails::consultarRemoverPrimeiroEmail(){
 }
 
 void FilaPorPrioridadeEmails::imprimir(){
-    Celula* aux = this->primeiro_;
+    No<Email>* aux = this->primeiro_;
 
     while (aux){
         std::cout << aux->item.getPrioridade() << " " << aux->item.getMensagem() << std::endl;
@@ -77,6 +77,6 @@ void FilaPorPrioridadeEmails::imprimir(){
 
 FilaPorPrioridadeEmails::~FilaPorPrioridadeEmails(){
     while (this->primeiro_ != nullptr){
-        this->consultarRemoverPrimeiroEmail();
+        this->consultarRemoverPrimeiroEmail(-1);
     }
 }

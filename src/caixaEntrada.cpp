@@ -8,6 +8,6 @@ void CaixaDeEntrada::adicionar(int prioridade, std::string mensagem){
     this->mensagens->adicionar(prioridade, mensagem);
 }
 
-void CaixaDeEntrada::consultarRemoverPrimeiroEmail(){
-    this->mensagens->consultarRemoverPrimeiroEmail();
+void CaixaDeEntrada::consultarRemoverPrimeiroEmail(int idUsuario){
+    this->mensagens->consultarRemoverPrimeiroEmail(idUsuario);
 }

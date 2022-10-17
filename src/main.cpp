@@ -7,8 +7,21 @@
 #include "servidor.hpp"
 #include "filaPorPrioridadeEmails.hpp"
 #include "constantes.hpp"
+#include "log.hpp"
 
 using namespace std;
+
+string getMensagem(stringstream *linha){
+    string mensagem = "", aux = "";
+
+    while(aux != OPERACAO_FIM){
+        if(mensagem.empty()) mensagem += aux;
+        else mensagem += (" " + aux);
+        *linha >> aux;
+    }
+
+    return mensagem;
+}
 
 void processarComando(stringstream *linha, Servidor* servidor){
     string comando = "";
@@ -23,8 +36,8 @@ void processarComando(stringstream *linha, Servidor* servidor){
     } else if(comando == OPERACAO_ENTREGA){
         int prioridade;
         string mensagem;
-        *linha >> prioridade >> mensagem;
-        servidor->enviarEmail(idUsuario, prioridade, mensagem);
+        *linha >> prioridade;
+        servidor->enviarEmail(idUsuario, prioridade, getMensagem(linha));
     } else {
         cout << "ERRO: Comando nao reconhecido" << endl;
     }
