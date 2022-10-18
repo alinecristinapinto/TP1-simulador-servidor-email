@@ -7,6 +7,7 @@
 #include "filaPorPrioridadeEmails.hpp"
 #include "constantes.hpp"
 #include "log.hpp"
+#include "memlog.hpp"
 
 using namespace std;
 
@@ -51,6 +52,15 @@ int main(int argc, char* argv[]){
 
     Servidor *servidor = new Servidor();
 
+    string nome_memlog = "log.out"; 
+    iniciaMemLog((char *) nome_memlog.c_str());
+
+    if (true){ 
+        ativaMemLog();
+    } else {
+        desativaMemLog();
+    }
+
     for(string linha; getline(arquivo, linha);){
         stringstream streamLinha(linha);
         processarComando(&streamLinha, servidor);
@@ -58,5 +68,5 @@ int main(int argc, char* argv[]){
 
     arquivo.close();
 
-    return 0;
+    return finalizaMemLog();
 }
