@@ -8,7 +8,7 @@
  * @brief Classe responsavel pelo armazenamento e gerenciamento do servidor de emails
  */
 class Servidor {
-    public:
+public:
     Servidor();
 
     void cadastrarUsuario(int id);
@@ -21,10 +21,9 @@ class Servidor {
 
     void consultarEmail(int idUsuario);
 
-    protected:      
-    /**
-    * @brief Lista de usuarios do servidor de email
-    */
+    virtual ~Servidor() = default;
+
+protected:      
     ListaUsuarios *usuarios;
 };
 

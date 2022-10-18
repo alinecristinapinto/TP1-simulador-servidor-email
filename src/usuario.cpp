@@ -1,10 +1,5 @@
 #include "usuario.hpp"
 
-Usuario::Usuario(){
-    this->id = -1;
-    this->caixa = new CaixaDeEntrada();
-}
-
 Usuario::Usuario(int id){
     Log::erroAssert(!(id >= 0 && id <= pow(10,6)), "ID " + std::to_string(id) + " INVALIDO");
 

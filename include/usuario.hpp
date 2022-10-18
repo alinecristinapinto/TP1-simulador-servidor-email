@@ -10,9 +10,7 @@
  * de usuario.
  */
 class Usuario {
-public:
-    Usuario();
-    
+public:    
     Usuario(int id);
 
     int getId();
