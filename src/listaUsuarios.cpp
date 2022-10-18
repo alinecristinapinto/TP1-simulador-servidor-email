@@ -23,12 +23,12 @@ bool ListaUsuarios::presente(int id){
 
 void ListaUsuarios::inserirInicio(int id){
     if(this->presente(id)){
-        std::cout << "ERRO: CONTA " << id << " JA EXISTENTE" << std::endl;
+        Log::erro("CONTA " + std::to_string(id) + " JA EXISTENTE");
         return;
     } 
 
     No<Usuario>* novo_item = new No<Usuario>{Usuario(id), nullptr};
-    erroAssert(!(novo_item == NULL), "Erro ao alocar memoria para usuario");
+    Log::erroAssert(novo_item == NULL, "Erro ao alocar memoria para usuario id: " + std::to_string(id));
 
     if(this->lista_vazia()){
         novo_item->proximo = nullptr;
@@ -38,7 +38,7 @@ void ListaUsuarios::inserirInicio(int id){
         this->primeiro_ = novo_item;
     }
 
-    std::cout << "OK: CONTA " << id << " CADASTRADA" << std::endl;
+    Log::info("OK: CONTA " + std::to_string(id) + " CADASTRADA");
 }
 
 void ListaUsuarios::remover(int id){
@@ -48,7 +48,7 @@ void ListaUsuarios::remover(int id){
         usuario_deletado = this->primeiro_;
         this->primeiro_ = this->primeiro_->proximo;
 
-        std::cout << "OK: CONTA " << id << " REMOVIDA" << std::endl;
+        Log::info("OK: CONTA " + std::to_string(id) + " REMOVIDA");
         delete usuario_deletado; 
 
         return;
@@ -62,19 +62,19 @@ void ListaUsuarios::remover(int id){
             usuario_deletado = aux->proximo;
             aux->proximo = usuario_deletado->proximo;
   
-            std::cout << "OK: CONTA " << id << " REMOVIDA" << std::endl;
+            Log::info("OK: CONTA " + std::to_string(id) + " REMOVIDA");
             delete usuario_deletado; 
 
             return;
         }
     }
 
-    std::cout << "ERRO: CONTA " << id << " NAO EXISTE" << std::endl;
+    Log::erro("CONTA " + std::to_string(id) + " NAO EXISTE");
 }
 
 void ListaUsuarios::enviarEmail(int idUsuario, int prioridade, std::string mensagem){
     if(!this->presente(idUsuario)){
-        std::cout << "ERRO: CONTA " << idUsuario << " NAO EXISTENTE" << std::endl;
+        Log::erro("CONTA " + std::to_string(idUsuario) + " NAO EXISTENTE");
         return;
     } 
 
@@ -87,12 +87,12 @@ void ListaUsuarios::enviarEmail(int idUsuario, int prioridade, std::string mensa
         aux = aux->proximo;
     }
 
-    std::cout << "OK: MENSAGEM PARA " << idUsuario << " ENTREGUE" << std::endl;
+    Log::info("OK: MENSAGEM PARA " + std::to_string(idUsuario) + " ENTREGUE");
 }
 
 void ListaUsuarios::consultarRemoverEmail(int idUsuario){
     if(!this->presente(idUsuario)){
-        std::cout << "ERRO: CONTA " << idUsuario << " NAO EXISTENTE" << std::endl;
+        Log::erro("CONTA " + std::to_string(idUsuario) + " NAO EXISTENTE");
         return;
     } 
 

@@ -2,6 +2,7 @@
 #define EMAIL_H
 
 #include <iostream>
+#include "log.hpp"
 
 /**
  * @brief Classe responsavel pelo armazenamento e gerenciamento das informacoes
@@ -15,7 +16,7 @@ public:
 
     std::string getMensagem();
 
-    ~Email();
+    virtual ~Email() = default;
 
 protected:      
     /**

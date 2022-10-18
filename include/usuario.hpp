@@ -2,6 +2,8 @@
 #define USUARIO_H
 
 #include "caixaEntrada.hpp" 
+#include "log.hpp"
+#include <cmath>
 
 /**
  * @brief Classe responsavel pelo armazenamento e gerenciamento das informacoes

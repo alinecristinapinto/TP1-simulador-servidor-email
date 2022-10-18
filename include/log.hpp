@@ -15,6 +15,13 @@ public:
     static void erro(std::string mensagem){
         std::cout << "ERRO: " << mensagem << std::endl;
     }
+
+    static void erroAssert(bool erro, std::string mensagem){
+        if(erro){
+            std::cout << "Erro: " << mensagem << std::endl;
+            abort();
+        }
+    }
 };
 
 #endif

@@ -2,7 +2,6 @@
 #define SERVIDOR_H
 
 #include <iostream>
-#include "msgassert.hpp"
 #include "listaUsuarios.hpp"
 
 /**

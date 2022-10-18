@@ -3,7 +3,7 @@
 
 #include "usuario.hpp"
 #include "constantes.hpp"
-#include "msgassert.hpp"
+#include "log.hpp"
 
 class ListaUsuarios {
 public:

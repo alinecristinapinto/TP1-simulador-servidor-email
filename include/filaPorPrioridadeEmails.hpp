@@ -4,7 +4,6 @@
 #include <iostream>
 #include "email.hpp"
 #include "constantes.hpp"
-#include "msgassert.hpp"
 #include "log.hpp"
 
 class FilaPorPrioridadeEmails {

@@ -11,7 +11,7 @@ bool FilaPorPrioridadeEmails::vazia(){
 
 void FilaPorPrioridadeEmails::adicionar(int prioridade, std::string mensagem){
     No<Email> *novo_item = new No<Email>{Email(prioridade, mensagem), nullptr, nullptr};
-    erroAssert(!(novo_item == NULL), "Erro ao alocar memoria para mensagem de email");
+    Log::erroAssert(novo_item == NULL, "Erro ao alocar memoria para mensagem de email");
     
     if(this->vazia()){
         this->primeiro_ = novo_item;

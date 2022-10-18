@@ -3,7 +3,6 @@
 #include <cstring>
 #include <sstream>
 
-#include "msgassert.hpp" 
 #include "servidor.hpp"
 #include "filaPorPrioridadeEmails.hpp"
 #include "constantes.hpp"
@@ -39,16 +38,16 @@ void processarComando(stringstream *linha, Servidor* servidor){
         *linha >> prioridade;
         servidor->enviarEmail(idUsuario, prioridade, getMensagem(linha));
     } else {
-        cout << "ERRO: Comando nao reconhecido" << endl;
+        Log::erro("Comando nao reconhecido");
     }
 }
 
 int main(int argc, char* argv[]){
-    erroAssert((argc == 2 && strcmp(argv[1], "") != 0), "Arquivo obrigatorio!");
+    Log::erroAssert((argc != 2 || strcmp(argv[1], "") == 0), "Arquivo de entrada obrigatorio");
     string nome_arquivo = argv[1]; 
 
     ifstream arquivo(nome_arquivo);
-    erroAssert(arquivo.is_open(), "Erro ao ler arquivo!");
+    Log::erroAssert(!arquivo.is_open(), "Nao foi possivel ler o arquivo");
 
     Servidor *servidor = new Servidor();
 
