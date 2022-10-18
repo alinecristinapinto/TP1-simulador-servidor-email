@@ -1,31 +1,17 @@
 #include <iostream>
 #include <fstream>
-#include <cstring>
-#include <sstream>
 
 #include "servidor.hpp"
-#include "filaPorPrioridadeEmails.hpp"
 #include "constantes.hpp"
 #include "log.hpp"
 #include "memlog.hpp"
+#include "leitorLinhaComando.hpp"
 
 using namespace std;
 
-string getMensagem(stringstream *linha){
-    string mensagem = "", aux = "";
-
-    while(aux != OPERACAO_FIM){
-        if(mensagem.empty()) mensagem += aux;
-        else mensagem += (" " + aux);
-        *linha >> aux;
-    }
-
-    return mensagem;
-}
-
 void processarComando(stringstream *linha, Servidor* servidor){
-    string comando = "";
     int idUsuario;
+    string comando = "";
 
     *linha >> comando >> idUsuario;
 
@@ -35,31 +21,32 @@ void processarComando(stringstream *linha, Servidor* servidor){
         servidor->consultarEmail(idUsuario);
     } else if(comando == OPERACAO_ENTREGA){
         int prioridade;
-        string mensagem;
         *linha >> prioridade;
-        servidor->enviarEmail(idUsuario, prioridade, getMensagem(linha));
+        servidor->enviarEmail(idUsuario, prioridade, LeitorLinhaComando::buscarMensagem(linha));
     } else {
         Log::erro("Comando nao reconhecido");
     }
 }
 
 int main(int argc, char* argv[]){
-    Log::erroAssert((argc != 2 || strcmp(argv[1], "") == 0), "Arquivo de entrada obrigatorio");
-    string nome_arquivo = argv[1]; 
+    LeitorLinhaComando linha_comando;
 
-    ifstream arquivo(nome_arquivo);
-    Log::erroAssert(!arquivo.is_open(), "Nao foi possivel ler o arquivo");
+    string nomeArquivo = linha_comando.buscarNomeArquivo(argc, argv);
+    string nomeMemlog = linha_comando.buscarNomeMemlog(argc, argv); 
+    bool ativarRegistroAcesso = linha_comando.verificarRegistroAcesso(argc, argv); 
 
-    Servidor *servidor = new Servidor();
+    iniciaMemLog((char *) nomeMemlog.c_str());
 
-    string nome_memlog = "log.out"; 
-    iniciaMemLog((char *) nome_memlog.c_str());
-
-    if (true){ 
+    if (ativarRegistroAcesso){ 
         ativaMemLog();
     } else {
         desativaMemLog();
     }
+
+    ifstream arquivo(nomeArquivo);
+    Log::erroAssert(!arquivo.is_open(), "Nao foi possivel ler o arquivo");
+
+    Servidor *servidor = new Servidor();
 
     for(string linha; getline(arquivo, linha);){
         stringstream streamLinha(linha);
@@ -67,6 +54,6 @@ int main(int argc, char* argv[]){
     }
 
     arquivo.close();
-
+    delete servidor;
     return finalizaMemLog();
 }
