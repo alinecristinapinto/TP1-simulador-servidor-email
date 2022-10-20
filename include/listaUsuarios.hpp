@@ -4,7 +4,6 @@
 #include "usuario.hpp"
 #include "constantes.hpp"
 #include "log.hpp"
-#include "memlog.hpp"
 
 class ListaUsuarios {
 public:

@@ -12,7 +12,6 @@ bool ListaUsuarios::presente(int id, int idMemlog){
     No<Usuario>* aux = this->primeiro_;
 
     while (aux){
-        // LEMEMLOG((long int) aux->item.getId(), sizeof (int), idMemlog);
         if(aux->item.getId() == id){
             return true;
         }
@@ -30,47 +29,31 @@ void ListaUsuarios::inserirInicio(int id){
 
     No<Usuario>* novoItem = new No<Usuario>{Usuario(id), nullptr};
     Log::erroAssert(novoItem == NULL, "Erro ao alocar memoria para usuario id: " + std::to_string(id));
-    //ESCREVEMEMLOG((long int) &novoUsuario, sizeof (int), ID_MEMLOG_OPERACAO_CADASTRAR);
-
-    if(this->lista_vazia()){
-        novoItem->proximo = nullptr;
-        this->primeiro_ = novoItem;
-    } else {
-        novoItem->proximo = this->primeiro_;
-        this->primeiro_ = novoItem;
-    }
+    
+    novoItem->proximo = this->primeiro_;
+    this->primeiro_ = novoItem;
 
     Log::info("OK: CONTA " + std::to_string(id) + " CADASTRADA");
 }
 
 void ListaUsuarios::remover(int id){
-    No<Usuario> *usuarioDeletado, *aux;
+    No<Usuario> *aux = this->primeiro_, *anterior = nullptr;
 
-    if(this->primeiro_->item.getId() == id){
-        usuarioDeletado = this->primeiro_;
-        this->primeiro_ = this->primeiro_->proximo;
+    while(aux){
+        if(aux->item.getId() == id && !anterior){
+            this->primeiro_ = this->primeiro_->proximo;
 
-        // LEMEMLOG((long int) &usuarioDeletado->item.getId(), sizeof (int), 1);
-        Log::info("OK: CONTA " + std::to_string(id) + " REMOVIDA");
-        delete usuarioDeletado; 
+            delete aux;
+            return;
+        } else if (aux->item.getId() == id && anterior){
+            anterior->proximo = aux->proximo;
 
-        return;
-    } else {
-        aux = this->primeiro_;
-
-        while (aux->proximo && aux->proximo->item.getId() != id) {
-            // LEMEMLOG((long int) &aux->item.getId(), sizeof (int), ID_MEMLOG_OPERACAO_REMOVER);
-            aux = aux->proximo;
-        }
-        if(aux->proximo){
-            usuarioDeletado = aux->proximo;
-            aux->proximo = usuarioDeletado->proximo;
-  
-            Log::info("OK: CONTA " + std::to_string(id) + " REMOVIDA");
-            delete usuarioDeletado; 
-
+            delete aux;
             return;
         }
+
+        anterior = aux;
+        aux = aux->proximo;
     }
 
     Log::erro("CONTA " + std::to_string(id) + " NAO EXISTE");
@@ -85,7 +68,6 @@ void ListaUsuarios::enviarEmail(int idUsuario, int prioridade, std::string mensa
     No<Usuario>* aux = this->primeiro_;
 
     while(aux){
-        // LEMEMLOG((long int) &aux->item.getId(), sizeof (int), ID_MEMLOG_OPERACAO_ENTREGA);
         if(aux->item.getId() == idUsuario){
             aux->item.getCaixaDeEntrada()->adicionar(prioridade, mensagem);
         }
@@ -104,7 +86,6 @@ void ListaUsuarios::consultarRemoverEmail(int idUsuario){
     No<Usuario>* aux = this->primeiro_;
 
     while(aux){
-        // LEMEMLOG((long int) &aux->item.getId(), sizeof (int), ID_MEMLOG_OPERACAO_CONSULTA);
         if(aux->item.getId() == idUsuario){
             aux->item.getCaixaDeEntrada()->consultarRemoverPrimeiroEmail(idUsuario);
         }
