@@ -32,15 +32,10 @@ void processarComando(stringstream *linha, Servidor* servidor){
 
 int main(int argc, char* argv[]){
     string nomeArquivo = LeitorLinhaComando::buscarNomeArquivo(argc, argv);
-    bool ativarRegistroAcesso = LeitorLinhaComando::verificarRegistroAcesso(argc, argv);
 
     iniciaMemLog((char *) NOME_MEMLOG_DEFAULT.c_str());
-   
-    if (ativarRegistroAcesso){ 
-        ativaMemLog();
-    } else {
-        desativaMemLog();
-    }
+    desativaMemLog();
+    
 
     ifstream arquivo(nomeArquivo);
     Log::erroAssert(!arquivo.is_open(), "Nao foi possivel ler o arquivo");

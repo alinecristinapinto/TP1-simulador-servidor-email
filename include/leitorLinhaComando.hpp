@@ -13,12 +13,7 @@ class LeitorLinhaComando {
 public:
     static std::string buscarNomeArquivo(int argc, char* argv[]);
 
-    static bool verificarRegistroAcesso(int argc, char* argv[]);
-
     static std::string buscarMensagem(std::stringstream *linha);
-
-private:
-    static bool verificarParametroPresente(int argc, char* argv[], std::string parametro); 
 };
 
 #endif
