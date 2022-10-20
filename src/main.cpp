@@ -17,6 +17,8 @@ void processarComando(stringstream *linha, Servidor* servidor){
 
     if(comando == OPERACAO_CADASTRAR){
         servidor->cadastrarUsuario(idUsuario);
+    } else if(comando == OPERACAO_REMOVER){
+        servidor->removerUsuario(idUsuario);
     } else if(comando == OPERACAO_CONSULTA){
         servidor->consultarEmail(idUsuario);
     } else if(comando == OPERACAO_ENTREGA){
@@ -48,6 +50,7 @@ int main(int argc, char* argv[]){
 
     Servidor *servidor = new Servidor();
 
+    defineFaseMemLog(0);
     for(string linha; getline(arquivo, linha);){
         stringstream streamLinha(linha);
         processarComando(&streamLinha, servidor);

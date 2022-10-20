@@ -10,46 +10,50 @@ bool FilaPorPrioridadeEmails::vazia(){
 }
 
 void FilaPorPrioridadeEmails::adicionar(int prioridade, std::string mensagem){
-    No<Email> *novo_item = new No<Email>{Email(prioridade, mensagem), nullptr, nullptr};
-    Log::erroAssert(novo_item == NULL, "Erro ao alocar memoria para mensagem de email");
+    No<Email> *novoItem = new No<Email>{Email(prioridade, mensagem), nullptr, nullptr};
+    Log::erroAssert(novoItem == NULL, "Erro ao alocar memoria para mensagem de email");
+
+    // ESCREVEMEMLOG((long int) &novoItem->item.getPrioridade(), sizeof (int), ID_MEMLOG_OPERACAO_ENTREGA);
+    // ESCREVEMEMLOG((long int) &novoItem->item.getMensagem(), sizeof (std::string), ID_MEMLOG_OPERACAO_ENTREGA);
     
     if(this->vazia()){
-        this->primeiro_ = novo_item;
-        this->ultimo_ = novo_item;
+        this->primeiro_ = novoItem;
+        this->ultimo_ = novoItem;
     } else if(!this->ultimo_->anterior) {
         if(this->ultimo_->item.getPrioridade() < prioridade){
-            novo_item->proximo = this->ultimo_;
-            this->ultimo_->anterior = novo_item;
-            this->primeiro_ = novo_item;
+            novoItem->proximo = this->ultimo_;
+            this->ultimo_->anterior = novoItem;
+            this->primeiro_ = novoItem;
         } else {
-            novo_item->proximo = this->ultimo_->proximo;
-            this->ultimo_->proximo = novo_item;
-            novo_item->anterior = this->ultimo_;
-            this->ultimo_ = novo_item;
+            novoItem->proximo = this->ultimo_->proximo;
+            this->ultimo_->proximo = novoItem;
+            novoItem->anterior = this->ultimo_;
+            this->ultimo_ = novoItem;
         }
     } else {
         No<Email> *aux = this->ultimo_;
 
         while(aux->anterior && prioridade > aux->anterior->item.getPrioridade()){
+            // LEMEMLOG((long int) &aux->item.getPrioridade(), sizeof (int), ID_MEMLOG_OPERACAO_ENTREGA);
             aux = aux->anterior;
         }
         if(aux->item.getPrioridade() < prioridade){
-            novo_item->anterior = aux->anterior;
+            novoItem->anterior = aux->anterior;
             if(aux->anterior){
-                aux->anterior->proximo = novo_item;
+                aux->anterior->proximo = novoItem;
             }
-            novo_item->proximo = aux;
-            aux->anterior = novo_item;
-            if(!novo_item->anterior) this->primeiro_ = novo_item;
+            novoItem->proximo = aux;
+            aux->anterior = novoItem;
+            if(!novoItem->anterior) this->primeiro_ = novoItem;
         } else {
-            novo_item->anterior = aux;
-            aux->proximo = novo_item;
-            this->ultimo_ = novo_item;
+            novoItem->anterior = aux;
+            aux->proximo = novoItem;
+            this->ultimo_ = novoItem;
         }
     }
 }
 
-void FilaPorPrioridadeEmails::consultarRemoverPrimeiroEmail(int idUsuario){
+void FilaPorPrioridadeEmails::consultarRemoverPrimeiroEmail(int idUsuario, int idMemlog){
     if(this->vazia()){
         Log::erro("CAIXA DE ENTRADA VAZIA");
         return;
@@ -61,13 +65,13 @@ void FilaPorPrioridadeEmails::consultarRemoverPrimeiroEmail(int idUsuario){
     if(this->primeiro_->proximo){
         this->primeiro_ = this->primeiro_->proximo;
         this->primeiro_->anterior = nullptr;
-    }
-
-    if(remover == this->ultimo_){
+    } else {
         this->primeiro_ = nullptr;
         this->ultimo_ = nullptr;
     }
 
+    // ESCREVEMEMLOG((long int) &remover->item.getPrioridade(), sizeof (int), idMemlog);
+    // ESCREVEMEMLOG((long int) &remover->item.getMensagem(), sizeof (std::string), idMemlog);
     delete remover;    
 }
 
@@ -82,6 +86,6 @@ void FilaPorPrioridadeEmails::imprimir(){
 
 FilaPorPrioridadeEmails::~FilaPorPrioridadeEmails(){
     while (this->primeiro_ != nullptr){
-        this->consultarRemoverPrimeiroEmail(-1);
+        this->consultarRemoverPrimeiroEmail(-1, ID_MEMLOG_OPERACAO_REMOVER);
     }
 }

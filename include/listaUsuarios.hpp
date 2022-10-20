@@ -4,6 +4,7 @@
 #include "usuario.hpp"
 #include "constantes.hpp"
 #include "log.hpp"
+#include "memlog.hpp"
 
 class ListaUsuarios {
 public:
@@ -13,7 +14,7 @@ public:
 
     void remover(int id);
 
-    bool presente(int id);
+    bool presente(int id, int idMemlog);
 
     bool lista_vazia();
 

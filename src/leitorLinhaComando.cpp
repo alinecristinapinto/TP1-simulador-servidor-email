@@ -22,7 +22,7 @@ bool LeitorLinhaComando::verificarParametroPresente(int argc, char* argv[], std:
 }
 
 std::string LeitorLinhaComando::buscarNomeArquivo(int argc, char* argv[]) {
-    Log::erroAssert((argc != 2 || strcmp(argv[1], "") == 0), "Arquivo de entrada obrigatorio");
+    Log::erroAssert((argc < 2 || strcmp(argv[1], "") == 0), "Arquivo de entrada obrigatorio");
     return argv[1]; 
 }
 
