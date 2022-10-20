@@ -9,5 +9,5 @@ void CaixaDeEntrada::adicionar(int prioridade, std::string mensagem){
 }
 
 void CaixaDeEntrada::consultarRemoverPrimeiroEmail(int idUsuario){
-    this->mensagens->consultarRemoverPrimeiroEmail(idUsuario, ID_MEMLOG_OPERACAO_CONSULTA);
+    this->mensagens->consultarRemoverPrimeiroEmail(idUsuario);
 }

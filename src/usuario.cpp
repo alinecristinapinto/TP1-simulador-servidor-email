@@ -8,7 +8,6 @@ Usuario::Usuario(int id){
 }
 
 int Usuario::getId(){
-    std::cout << &this->id << std::endl;
     return this->id;
 }
 

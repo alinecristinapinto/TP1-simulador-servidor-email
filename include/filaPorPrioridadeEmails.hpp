@@ -5,7 +5,6 @@
 #include "email.hpp"
 #include "constantes.hpp"
 #include "log.hpp"
-#include "memlog.hpp"
 
 class FilaPorPrioridadeEmails {
 public:
@@ -13,7 +12,7 @@ public:
 
     void adicionar(int prioridade, std::string mensagem);
 
-    void consultarRemoverPrimeiroEmail(int idUsuario, int idMemlog);
+    void consultarRemoverPrimeiroEmail(int idUsuario);
 
     bool vazia();
 
@@ -22,7 +21,6 @@ public:
     ~FilaPorPrioridadeEmails();
 protected:
     No<Email>* primeiro_;
-    No<Email>* ultimo_; 
 };
 
 #endif

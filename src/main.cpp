@@ -4,7 +4,6 @@
 #include "servidor.hpp"
 #include "constantes.hpp"
 #include "log.hpp"
-#include "memlog.hpp"
 #include "leitorLinhaComando.hpp"
 
 using namespace std;
@@ -31,26 +30,13 @@ void processarComando(stringstream *linha, Servidor* servidor){
 }
 
 int main(int argc, char* argv[]){
-    LeitorLinhaComando linha_comando;
-
-    string nomeArquivo = linha_comando.buscarNomeArquivo(argc, argv);
-    string nomeMemlog = linha_comando.buscarNomeMemlog(argc, argv); 
-    bool ativarRegistroAcesso = linha_comando.verificarRegistroAcesso(argc, argv); 
-
-    iniciaMemLog((char *) nomeMemlog.c_str());
-
-    if (ativarRegistroAcesso){ 
-        ativaMemLog();
-    } else {
-        desativaMemLog();
-    }
+    string nomeArquivo = LeitorLinhaComando::buscarNomeArquivo(argc, argv);
 
     ifstream arquivo(nomeArquivo);
     Log::erroAssert(!arquivo.is_open(), "Nao foi possivel ler o arquivo");
 
     Servidor *servidor = new Servidor();
 
-    defineFaseMemLog(0);
     for(string linha; getline(arquivo, linha);){
         stringstream streamLinha(linha);
         processarComando(&streamLinha, servidor);
@@ -58,5 +44,6 @@ int main(int argc, char* argv[]){
 
     arquivo.close();
     delete servidor;
-    return finalizaMemLog();
+
+    return 0;
 }

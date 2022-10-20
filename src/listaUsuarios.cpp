@@ -8,7 +8,7 @@ bool ListaUsuarios::lista_vazia() {
     return this->primeiro_ == nullptr;
 }
 
-bool ListaUsuarios::presente(int id, int idMemlog){
+bool ListaUsuarios::presente(int id){
     No<Usuario>* aux = this->primeiro_;
 
     while (aux){
@@ -22,7 +22,7 @@ bool ListaUsuarios::presente(int id, int idMemlog){
 }
 
 void ListaUsuarios::inserirInicio(int id){
-    if(this->presente(id, ID_MEMLOG_OPERACAO_CADASTRAR)){
+    if(this->presente(id)){
         Log::erro("CONTA " + std::to_string(id) + " JA EXISTENTE");
         return;
     } 
@@ -60,7 +60,7 @@ void ListaUsuarios::remover(int id){
 }
 
 void ListaUsuarios::enviarEmail(int idUsuario, int prioridade, std::string mensagem){
-    if(!this->presente(idUsuario, ID_MEMLOG_OPERACAO_ENTREGA)){
+    if(!this->presente(idUsuario)){
         Log::erro("CONTA " + std::to_string(idUsuario) + " NAO EXISTENTE");
         return;
     } 
@@ -78,7 +78,7 @@ void ListaUsuarios::enviarEmail(int idUsuario, int prioridade, std::string mensa
 }
 
 void ListaUsuarios::consultarRemoverEmail(int idUsuario){
-    if(!this->presente(idUsuario, ID_MEMLOG_OPERACAO_CONSULTA)){
+    if(!this->presente(idUsuario)){
         Log::erro("CONTA " + std::to_string(idUsuario) + " NAO EXISTENTE");
         return;
     } 

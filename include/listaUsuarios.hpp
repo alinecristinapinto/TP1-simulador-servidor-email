@@ -13,7 +13,7 @@ public:
 
     void remover(int id);
 
-    bool presente(int id, int idMemlog);
+    bool presente(int id);
 
     bool lista_vazia();
 
