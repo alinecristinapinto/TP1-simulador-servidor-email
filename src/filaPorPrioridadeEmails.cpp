@@ -20,7 +20,12 @@ void FilaPorPrioridadeEmails::adicionar(int prioridade, std::string mensagem){
     No<Email> *aux = this->primeiro_, *anterior = nullptr;
 
     while(true) {
-        if(aux == nullptr || aux->item.getPrioridade() < novoItem->item.getPrioridade()){
+        if(aux == nullptr){
+            novoItem->proximo = aux;
+            anterior->proximo = novoItem;
+
+            return;
+        } else if(aux->item.getPrioridade() < novoItem->item.getPrioridade()){
             novoItem->proximo = aux;
 
             if(aux == this->primeiro_){
